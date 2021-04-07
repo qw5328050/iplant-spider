@@ -126,3 +126,36 @@ subjectList.forEach((v, index) => {
 		}, 2000)
 	}
 })
+
+
+// var worm = function (key, index, text, level, isType) {
+// 	let idx = index + 1
+// 	return new Promise(resolve => {
+//     let mDate = new Date().getTime()
+// 		request(url + '?key=' + key + '&m=' + mDate, function (error, response, body) {
+// 			if(!body) {
+// 				isType ? worm(key, index, text, level, isType) : worm(key, index, text, level)
+// 			}
+// 		   if (body && body[0] === "{") {
+// 			   let data = JSON.parse(body)
+// 			   resolve(data)
+// 		   } else {
+// 			   resolve('end')
+// 		   }
+// 		})
+// 	})
+// }
+// async function getfamilies (v, index) {
+//   var data = await worm(v, index,'subject', 1)
+//   var param = {
+//      spid: data.frpsspno,
+//      classid: data.frpsspclassid
+//   }
+//   var value = fs.readFileSync('./text/families.json', 'utf-8')
+//   var arr = JSON.parse(value)
+//   arr.push(param)
+//   fs.writeFileSync('./text/families.json', JSON.stringify(arr));
+// }
+// subjectList.forEach((v, index) => {
+//   getfamilies(v,index)
+// })
