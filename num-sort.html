@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript">
+    $.ajax({
+      method: "get",
+      url: "https://webapi.sporttery.cn/gateway/lottery/getHistoryPageListV1.qry",
+      data: {
+        gameNo:85,
+        provinceId:0,
+        pageSize:4000,
+        isVerify:1,
+        pageNo:1
+      }
+    }).done(function( msg ) {
+        var list = msg.value && msg.value.list
+        if (!list) { return }
+        var numlist = list.map(v => {
+          return v.lotteryDrawResult
+        })
+        var allNuberList = handleNumber(numlist)
+        allNuberList.forEach((v,i) => {
+          console.log(i)
+          console.log(sortList(v))
+        })
+    });
+    var handleNumber = function (list, type) {
+      if (!list.length) { return }
+      var array = []
+      list.forEach(v => {
+        var vList = v.split(' ')
+        for(var i = 0; i < vList.length; i++) {
+          if (array[i]) {
+            array[i].push(vList[i])
+          } else {
+            array[i] = []
+            array[i].push(vList[i]) 
+          }
+        }
+      })
+      return array
+    }
+    var sortList = function (arr) {
+      var array = []
+      arr.forEach(v => {
+      	var val = array.filter(j => {
+      		return j.name == v
+      	})
+      	if (val.length == 0) {
+      		array.push({name:v,num:1})
+      	} else {
+      		val[0].num +=1
+      	}
+      })
+      var b = array.sort((a, b) => a.num - b.num)
+      return b
+    }
+  </script>
+</html>
